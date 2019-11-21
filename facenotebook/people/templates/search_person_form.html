@@ -15,4 +15,14 @@
     <input type="submit" name="search" value="Search"/>
     <input type="reset" name="reset" value="Reset"/>
 </form>
+
+    {% for person in persons %}
+        <b>------------------------------------</b>
+        {% for key, value in person.items %}
+            <ul>
+                <li>{{ key }}: {{ value }}</li>
+            </ul>
+        {% endfor %}
+    {% endfor %}
 {% endblock %}
+
