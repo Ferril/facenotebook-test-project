@@ -25,9 +25,9 @@ def search_person(data):
             person = {
                 "Surname": bytes.decode(person_data[b'surname']),
                 "Name": bytes.decode(person_data[b'name']),
-                "Patronymic": bytes.decode(person_data[b'patronymic'])
+                "Patronymic": bytes.decode(person_data[b'patronymic']),
+                "Photo": person_data[b'photo'].decode('utf-8'),
             }
             search_result.append(person)
-        print(search_result)
     return search_result
 

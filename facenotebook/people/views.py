@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from django.utils.safestring import mark_safe
 from .redis_db import add_person, search_person
+from .helpers import get_data_from_request
 
 
 def add_person_view(request):
@@ -7,12 +9,12 @@ def add_person_view(request):
     if request.method == 'POST':
         request_data = request.POST.copy()
         photo = request.FILES.get('photo')
-        person_photo = photo.read() if photo else ''
+        person_photo = photo.read() if photo else b''
         data = {
             'surname': request_data['surname'],
             'name': request_data['name'],
             'patronymic': request_data['patronymic'],
-            'photo': person_photo
+            'photo': mark_safe(person_photo)
         }
         add_person(data)
     return render(request, template_name)
@@ -20,17 +22,10 @@ def add_person_view(request):
 
 def search_person_view(request):
     template_name = 'search_person_form.html'
-    if request.method == 'POST':
-        request_data = request.POST.copy()
-        data = {
-            b'surname': str.encode(request_data['surname']),
-            b'name': str.encode(request_data['name']),
-            b'patronymic': str.encode(request_data['patronymic']),
-        }
-        data_search = {}
-        for key in data:
-            if data[key]:
-                data_search[key] = data[key]
-        persons = search_person(data_search)
-        return render(request, template_name, {'persons': persons})
+    if request.method == 'GET':
+        request_data = request.GET.copy()
+        if request_data.get('action') == 'search':
+            data_search = get_data_from_request(request_data)
+            persons = search_person(data_search)
+            return render(request, template_name, {'persons': persons})
     return render(request, template_name)

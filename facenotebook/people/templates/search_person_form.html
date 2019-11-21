@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1>Find person</h1>
-<form method="post" name="Person_info" enctype="multipart/form-data" action=".">{% csrf_token %}
+<form method="get" name="Person_info" enctype="multipart/form-data" action=".">{% csrf_token %}
     <table>
         <tr><td><b>Surname:</b></td>
             <td><input type="text" name="surname" size=20></td></tr>
@@ -19,9 +19,11 @@
     {% for person in persons %}
         <b>------------------------------------</b>
         {% for key, value in person.items %}
+            {% if key != 'Photo' %}
             <ul>
                 <li>{{ key }}: {{ value }}</li>
             </ul>
+            {% endif %}
         {% endfor %}
     {% endfor %}
 {% endblock %}

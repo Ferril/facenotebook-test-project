@@ -21,6 +21,7 @@ INSTALLED_APPS = [
 
     # third party applications
     'redis',
+    'rest_framework',
 
     # project apps
     'facenotebook.people',
