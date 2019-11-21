@@ -1,8 +1,6 @@
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
 <h1>Add person</h1>
 <form method="post" name="Person_info" enctype="multipart/form-data" action=".">{% csrf_token %}
     <table>
@@ -19,5 +17,4 @@
     <input type="submit" name="save_person" value="Save"/>
     <input type="reset" name="reset" value="Reset"/>
 </form>
-</body>
-</html>
+{% endblock %}}

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Face-notebook</title>
+</head>
+<body>
+<a href="{% url 'add_person' %}">Add Person</a>
+<a href="{% url 'find_person' %}">Find Person</a>
+{% block content %}
+{% endblock %}
+</body>
+</html>
