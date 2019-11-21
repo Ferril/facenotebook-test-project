@@ -64,16 +64,13 @@ DATABASES = {
     }
 }
 
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        }
-    }
+# Redis
+REDIS_SETTINGS = {
+    'host': 'localhost',
+    'port': 6379,
+    'db': 0,
+    'socket_timeout': 3,
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
