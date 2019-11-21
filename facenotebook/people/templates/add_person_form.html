@@ -1,0 +1,23 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+<h1>Add person</h1>
+<form method="post" name="Person_info" enctype="multipart/form-data" action=".">{% csrf_token %}
+    <table>
+        <tr><td><b>Surname:</b></td>
+            <td><input type="text" name="Family" size=20></td></tr>
+        <tr><td><b>Name:</b></td>
+            <td><input type="text" name="Name" size=20></td></tr>
+        <tr><td><b>Patronymic:</b></td>
+            <td><input type="text" name="Patronymic" size=20></td></tr>
+        <tr><td><b>Photo:</b></td>
+            <td><input id="image-file" type="file" name="Img">
+    </table>
+    <input type="hidden" name="action" value="save"/>
+    <input type="submit" name="save_person" value="Save"/>
+    <input type="reset" name="reset" value="Reset"/>
+</form>
+</body>
+</html>
