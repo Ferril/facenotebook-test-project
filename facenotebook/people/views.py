@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.utils.safestring import mark_safe
+# from django.utils.safestring import mark_safe
 from .redis_db import add_person, search_person
-from .helpers import get_data_from_request
+from .helpers import get_data_from_request, handle_uploaded_image
 
 
 def add_person_view(request):
@@ -9,12 +9,12 @@ def add_person_view(request):
     if request.method == 'POST':
         request_data = request.POST.copy()
         photo = request.FILES.get('photo')
-        person_photo = photo.read() if photo else b''
+        person_photo = handle_uploaded_image(photo) if photo else b''
         data = {
             'surname': request_data['surname'],
             'name': request_data['name'],
             'patronymic': request_data['patronymic'],
-            'photo': mark_safe(person_photo)
+            'photo': person_photo
         }
         add_person(data)
     return render(request, template_name)

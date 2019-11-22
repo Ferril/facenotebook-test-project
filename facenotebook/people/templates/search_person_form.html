@@ -2,7 +2,8 @@
 
 {% block content %}
 <h1>Find person</h1>
-<form method="get" name="Person_info" enctype="multipart/form-data" action=".">{% csrf_token %}
+<form method="get" name="Person_info" enctype="multipart/form-data"
+      action=".">{% csrf_token %}
     <table>
         <tr><td><b>Surname:</b></td>
             <td><input type="text" name="surname" size=20></td></tr>
@@ -23,6 +24,9 @@
             <ul>
                 <li>{{ key }}: {{ value }}</li>
             </ul>
+            {% else %}
+            <img src="{{ value }}" alt="Photo" width="200" height="80"/>
+            <h2>{{ value }}</h2>
             {% endif %}
         {% endfor %}
     {% endfor %}
